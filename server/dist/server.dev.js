@@ -23,10 +23,15 @@ var uuid = require('uuid');
 var JSONdb = require('simple-json-db');
 
 var db = new JSONdb('./database.json');
+var account_db = new JSONdb('./account_database.json');
 
 var session = require('express-session');
 
 var MongoDBStore = require('connect-mongodb-session')(session);
+
+var todo = require('./src/todo');
+
+var todos = require('./src/todos');
 
 dotenv.config({
   path: './config.env'
@@ -41,75 +46,41 @@ app.set('trust proxy', 1);
 app.use(session({
   secret: '.',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    maxAge: new Date(Date.now() + 60 * 1000 * 30)
+  }
 }));
 app.use(function (req, res, next) {
   console.log(req.session);
 
   if (!req.session.uuid) {
     req.session.uuid = uuid.v4();
-    db.set(req.session.uuid, [{
+    var _todo = {
       id: nanoid(),
-      title: 'todo 1',
+      title: 'todo item 1',
       completed: true
-    }, {
-      id: nanoid(),
-      title: 'todo 2',
-      completed: false
-    }, {
-      id: nanoid(),
-      title: 'todo 3',
-      completed: false
-    }, {
-      id: nanoid(),
-      title: 'todo 4',
-      completed: false
-    }, {
-      id: nanoid(),
-      title: 'todo 5',
-      completed: false
-    }]); // default todo data
+    };
+    var todoList = {
+      title: 'todo list 1',
+      sharedWith: [],
+      todos: [_todo]
+    };
+    var user = {
+      username: '',
+      password: '',
+      uuid: req.session.uuid
+    };
+    db.set(req.session.uuid, {
+      todoLists: [todoList]
+    }); // default todo data
+
+    account_db.set(user.uuid, user);
   }
 
   next();
 });
-app.get('/todos', function (req, res) {
-  return res.send(db.get(req.session.uuid));
-});
-app.post('/todos', function (req, res) {
-  var todo = [{
-    title: req.body.title,
-    id: nanoid(),
-    completed: false
-  }];
-  return res.send(db.get(req.session.uuid));
-});
-app.patch('/todos/:id', function (req, res) {
-  var id = req.params.id;
-  var index = db.get(req.session.uuid).findIndex(function (todo) {
-    return todo.id == id;
-  });
-  var completed = Boolean(req.body.completed);
-
-  if (index > -1) {
-    todos[index].completed = completed;
-  }
-
-  return res.send(todos[index]);
-});
-app["delete"]('/todos/:id', function (req, res) {
-  var id = req.params.id;
-  var todos = db.get('todos');
-  var index = todos.findIndex(function (todo) {
-    return todo.id == id;
-  });
-
-  if (index > -1) {
-    todos.splice(index, 1);
-  }
-
-  db.set('todos', todos);
-  res.send(todos);
-});
+todo(app, db);
+todos(app, db);
 var PORT = 3001;
 app.listen(PORT, console.log("Server running on port ".concat(PORT).green.bold));

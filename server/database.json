@@ -1,0 +1,17 @@
+{
+    "7eddadf1-3acd-438c-9798-a1dff62d07a0": {
+        "todoLists": [
+            {
+                "title": "todo list 1",
+                "sharedWith": [],
+                "todos": [
+                    {
+                        "id": "A1WY0MmBz_Lq2glDta7bd",
+                        "title": "todo item 1",
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
 export const getTodosAsync = createAsyncThunk(
-	'todo/getTodosAsync',
+	'todos/getTodosAsync',
 	async () => {
 		const resp = await fetch('http://localhost:3001/todos', {
 			mode: 'cors',
@@ -19,7 +19,7 @@ export const getTodosAsync = createAsyncThunk(
 );
 
 export const addTodoAsync = createAsyncThunk(
-	'todo/addTodoAsync',
+	'todos/addTodoAsync',
 	async (payload) => {
 		const resp = await fetch('http://localhost:3001/todos', {
 			method: 'POST',
@@ -38,7 +38,7 @@ export const addTodoAsync = createAsyncThunk(
 );
 
 export const toggleCompleteAsync = createAsyncThunk(
-	'todo/completeTodoAsync',
+	'todos/completeTodoAsync',
 	async (payload) => {
 		const resp = await fetch(`http://localhost:3001/todos/${payload.id}`, {
 			method: 'PATCH',
@@ -57,7 +57,7 @@ export const toggleCompleteAsync = createAsyncThunk(
 );
 
 export const deleteTodoAsync = createAsyncThunk(
-	'todo/deleteTodoAsync',
+	'todos/deleteTodoAsync',
 	async (payload) => {
 		const resp = await fetch(`http://localhost:3001/todos/${payload.id}`, {
 			credentials: 'include',
@@ -70,8 +70,8 @@ export const deleteTodoAsync = createAsyncThunk(
 	}
 );
 
-export const todoSlice = createSlice({
-	name: 'todo',
+export const todoListReducer = createSlice({
+	name: 'todos',
 	initialState: [],
 	reducers: {
 		addTodo: (state, action) => {
@@ -109,6 +109,6 @@ export const todoSlice = createSlice({
 	},
 });
 
-export const { addTodo, toggleComplete, deleteTodo } = todoSlice.actions;
+export const { addTodo, toggleComplete, deleteTodo } = todoListReducer.actions;
 
-export default todoSlice.reducer;
+export default todoListReducer.reducer;

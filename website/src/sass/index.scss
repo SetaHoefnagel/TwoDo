@@ -1,0 +1,167 @@
+@import './variables';
+@import './grid';
+@import './global';
+
+
+body {
+    font: 400 16px/1.4 'serif';
+    }
+#container #containerHeader{
+    // text-align: center;
+    cursor:move;
+}
+#container #editor1 {
+    border: 1px solid grey;
+    min-height: 100px;
+    width: 600px;
+    padding:10px;
+   }
+#container fieldset {
+    width: 600px;
+    height:3rem;
+    background-color: #f2f2f2;
+    border:none;
+}
+#container button {
+    width: 5ex;
+    text-align: center;
+    padding: 1px 3px;
+    height:30px;
+    width:30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border:none;
+}
+#container img{
+      width:100%;
+}
+#container .bold{
+background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJmSURBVHic7drPi05RHMfx18igGaaJzbAQShby22ZYKBb+CKyMJTsryo/IQigWUjbKnoWVpJSy8TOpIckCC0Xj1zTKGItLWcyZnmbuuY/z+L7rbO73PN/P93y65z73nHsIgiAIgiAIgiAIgiAIgiD43+lqSGc+1qB3Gr/9gfd4h5E6i/oX2YdRTNTQnuA4Fjc6gobYqLoz6jDq7/YVxzC7uaHk57D6jfq73cLCpgYzK3P+RZnz78ANzM2sg/xmNcEgLjQh1AlmwRA25RZpl1nXVa8trbYB7MbLRL4uHMlbcn7OmfzBfG2a+frxKJHzO/pmWO+UlDYNR1RTbjLmYHtO8dLMggd4nogtyylcolnwKnF9IKdoqWb1J65/yilaolkLsSERe5tTuESzjmJeInY3p3BJZvXgDPYn4k+ln2W10K5V+3pcarFvN5ZgCxZM0e/sTItqN6mX0rrbYw3MkpKmYYrP2IWfuYU6wayTeNaEUCeYdQhrmxDqBLP6cFW1NsxKu/4NX+Nmi327VcuYrdK7CmuwFxdnXFkbqXOLpgenE/km8KKGeqekpGk4ioM4n4ivxOqcBZRk1h+OYSwRG8wpXKJZH1W7pZOxPKdwiWaR/ozfnVO0VLNWJK5/ySlaolmbsSoRG84pXJpZ/biciI3jTk7xEszqUp2a2YP7WJfod1t1NKlYmtqimcC23IMp4c5qhSsyT0E6w6yHONCEUG6zPmTOfw87VRuAxZPr5N8YTmlgW6ZphvBNPSYN4wSWNjqC3zR1WrlXtZs5ndPK46rp/Ea1LgyCIAiCIAiCIAiCIAiCIAjaxi96FfJoiZEgRAAAAABJRU5ErkJggg==');
+}
+#container .italic{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGDSURBVHic7do7SgRBFEbh0z5BwUhQTMxEMDAXQ1EXIS7AHehWBBMznQ0YizsQJhBfiIGB4Rjo4BiMRnZD11BV3eL5oNJbdS/VfyUNkiRJkiRJkvTfFU0f4Ns8sAZMRqr3AnSBfqR6rTABnACDBOsZ2MjXSnoHpBnUz3oApmIddixWoRFtJ66/DKzGKtb0sN4y7NHLsEcWW6T9DK9ozyMWxT5wC3wSb0g94BxYyNhHoxaBd8qH0WnwXK10RPXNSf0w/CkFcEP5oO5o/mFqlR2qb9Vhg+dqpQ7lg/oAlho8V+sY7AEM9poM9gAGewCDvSaDPYDBXpPBHsBgD2Cw12SwBzDYazLYAxjsAQz2mgz2AAZ7TQZ7AIM9gMHOMLTPgFeqb07o6gPXwF7GPpIrgEviDals7WbrJrEV0g5qAJxm66ZEzFdnJmKtKrMZ9qgUc1hd4ClivTIXietntcnwX84Un+AxMJ6vld9S/Og1DawDc5Hq9YF74DFSPUmSJEmSJEnSyL4AJ3NtCSNV9DYAAAAASUVORK5CYII=');
+}
+#container .underline{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJhSURBVHic7drNahNRGMbxfw1WLBaiVtSioLiQrHSpWxERxAvQCxDcqjdRRBBX4qbriis3ikLxAhR3UhRcKC3FD6wgtmJ1XJwUnGTONCd5z5yZ8PzgUEjI+57zdD6SmQERERERERERkaaZAuaAd90x132taT0qMQ9kPWO+gT2i2wls0L+QTWBPg3rk7IhRFJgFdhW83gL2N6hHTqywJoZ8r249cmKFNZYUVgCFFUBhBVBYARRWAIUVQGEFUFgBFFYAhRVAYQVQWAEUVoBYYW2UvLfXqEfZNaufRj1yYoW1hrtqWeSIUQ9fnb/Ad6MeOTG3rI+e984Z9fDV+QD8MupRmUf0Xx/PcIuZHLH2JO6fUVR/YcTaXjEP8M88rx8Fro1Y+zr+3dDXt9b2UXz3JQO+ASeHrNvBHZOK6q5jdwKp3D2KF5UBb4FjgfWO426m+mretZh0KgfwbwUZ8Am4NGCty8DnklprwIzh3JO4hX+BW2MRuAK0ez7bBq4CLwaocSPuMqoxATxk+8VujVXgTffvoJ9ZINK9whSmgFcMvviQ8ZKGPgxSZhp4jG1QT+nfdcdGC7gN/GG0kDZxjxe1qp1+Gh3CjmP/j+fAqeqnnN5Z4AGwTHlAy8B94EyaaTp1OoOcwH2rn8U9e/UbWAGWgPcJ5yUiIuMuxtlwGjgNHIpQe1CrwGvgR8I5bOsC8JU4vwFDxxfgfNzlDm83YVcKqhgrFD/+PRTLa/Ad4KBhPQuHcfMyYRlWlHt1Buo6LxZJv+v1/ug2Y302bAN3gIu4Y1gq68AT4CY13rJERERERERERJx/gYhfcxk8X00AAAAASUVORK5CYII=');
+}
+#container .align-left{
+    background-image : url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAA1CAAAAAAsDUmHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAAAqo0jMgAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+MIHAYHAD13ih8AAAIrSURBVEjHzZaxTxRBFMa/N7OH0FJqSwnChsTYnomKnJUKFOo1JrbGwpBYmwCV0X9AvMRK1IJ4OTtjYyCQ44xWtNpaa9x5z+IIt7vHbGYeV3DlJvfLm2++b76XCEb2S3DGWeJIRxBLJZboJxShAkvo94uuajBJH00ewZIj1J8bu4Y1LLPd/jLRh/VZLtnaPacTjGp7b5suyev1C5zp5CL8LGhPuASnFJ9xGXm9rNRXN0QVAZInV8Tm75FkfeWHSi+eTkueAHGaKv3Fpux7w6xDGTOcx8G3EeQx5m+WKlgiUZZgkJ9Ff9/sB9+jzN8dF/KwhOR2OzyPhrc+mmFYn8X2fXuMw8VPOu+W2HrmwmFUHhMcQjxnJMyAasEZIuAifHpZaTRbMXrduwnru0fCq5WDYL14bqHKq4LFxRh/SZW/yEU8OWQrMwR72jjmWE65DQxmHORRPRdT+S2UT10dKr1a6m2hB5vKfuTm60LXOtveTEj1GJJpLTeczefxG/BPe3u9hhTyOAWj7EeDqUI/Gtxa6Cj1yq7dgcnPJeZDq6vSi9P7pqA9SMYeqv011LXItKyhvRB0+s11QIjp7ZN7+ZjFUb19Ys8cZ9v0voejpmcr3kKhp2sU3h2yuu7tWmc/r8WckTeu1523H3dgI/JY46918ep1HiYJP6PBBa/2Fksv9yL6MZtf9vYjyXjneS+8H2cfT3i1B8nksxiLS2U/ShaxRkvlXjjaPOJMsf4DQ22vjD/V/uUAAAAASUVORK5CYII=');
+    width:40px;
+}
+
+#container .align-right{
+    background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAA1CAAAAAAsDUmHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAAAqo0jMgAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+MIHAYOC3tn6N4AAAIsSURBVEjHzZexaxRBFMa/NzMXkzaltimjcQmI7QlqzFmpSQr1GsFWLCRgLSSpRP8B44GViRYhx9mJjRgi54lWabW1VtyZZ5GAM7uZZeYlRbbchY8337zf+94axrE9Bidciy3JFFhTRYvlFTJToMX069lQVBgXDyYPxMyB1O9rO8pJtNRW/8PEvti+ljUbO6dkhlFr93XXGt+vn3ClzC7Cj8B7wgVYofkOF+H7pbm9vMYiBIgfXWLt3yPx6tJ3kV9uuqj0BMgVhbC/nKr2vXJOJqVUncf/746VbbY5EjUeQ8Cy2sOB4lr059Xn5Dvl2dvjAY/BR+Kb/XQ2ldvYVj6PQcn6TX/MpV+EGWwuOB2pC3tZbBrsgSNnJJwFtZJ5IuAcYn5p7nR7OX7duQ4du0fCi6UvyX6583NNvcqYn8/pL27qL7IZ44d0I0PQR+TRCreBel3MsloAOKrOQn43lEkVlytzguneujAfXfdlwLbV/XVDomFIqrfYsR6PjK/AX9kZDUYdn0fCFJQwHxWmAh4VbswNhH6VV25B+XWxetsbivxyxV0VzlXisfvi/qplLUqpVj2H6Oib6+EKORl+WG77UlkZXt8nvIfV6Fu61PRMwyxkerxC6dnBy6vRrLX6/UrOGd3a1baN5uMn6Aw2W+5jm6N+nYYy6WdUOBP1XmPh+W5GPpazi9F8JB4fPB2l5+PMw4mo9yCefJLT7tyYj1xmrNTcuBdK2Typ/7X/ACjdr4z8YnCHAAAAAElFTkSuQmCC');
+    width:40px;
+}
+#container .align-center{
+    width: 38px;
+    background-size: contain;
+    background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAABGdBTUEAALGPC/xhBQAAADRJREFUOBFjYGBg2ArE/6mEtzIBDaImADlsCAJSwhSkFgVQGoYjIMwIpdfRdAhJUYMrHQIAWPdBdW2q70gAAAAASUVORK5CYII=');
+}
+
+#container .redo-apply{
+    background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M18.4%2010.6a10.5%2010.5%200%200%200-16.9%204.6L4%2016a8%208%200%200%201%2012.7-3.6L13%2016h9V7l-3.6%203.6z%22%2F%3E%3C%2Fsvg%3E');
+}
+#container .undo-apply{
+    background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12.5%208c-2.6%200-5%201-6.9%202.6L2%207v9h9l-3.6-3.6A8%208%200%200%201%2020%2016l2.4-.8a10.5%2010.5%200%200%200-10-7.2z%22%2F%3E%3C%2Fsvg%3E');
+}
+#container .unorderedlist{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAI0SURBVHic7dq7axRBGADw30UloEaICAbBQoVgwEcvKWx8gEh6sUqhf4jYaauFVtFGwUK00MrOR2ER8ZFCFBUj+ERFET2NxSgiZHbv9kJul3w/+JrZb4eZ79i527khhBBCCCGEEEIIIYQQlrpWBzkbMIIZfO0gfznGsL6HcS22H3iAt1U7aOEUfmIOH3Co5J5xzP7Jb2KcxbIu6wQOz9PZN2zJ5A/ieQ0m3GsczRVkoKBYE5mC7M/kj2FjQX9NsS93oahYnzPtnzLtnaxnTfClyk27/Fuv/sYrDGfyW7ipP4/OQsaeKsUiPYrT+Igb2FmSP4JL0qfT70l3E7/wWFqnQwghhBBCqK+y/awhHMEo7mAK7ZJ7DmA31vQ6uEU0J/2Cn8LrKh2sxVP/vxZcUVzgYxb/VWUhY1ba7Oza8UyHuRfNdfhegwn3GidyBSnaotmRad+ead+MFQX9NcXW3IWiYk1n2u9l2p9Ie9lNN1PlpvnWrMuW8JrVybfhpPSI3cYFae+nyEFpa7Zpj+RLnMabfg8khBBCCCGEyiZwF+9xDdtK8kdwEe/0/9Wlm2jjvh7+ka5y1uFWDSbea+ytUqzzmc4mM/mjNZjoQsS5XEGKtmiGMu2rM+0rC/pqklW5C0XFujpPWxvXM/mP8KKLQdVVbn6FBnBSKtCcdKa0bAEcl7Y6+v0oVY0zCs6UdnJaeRib8FA6U1pmUDrH1aR/d9rSRuezfg8khBBCCCGEEEIIIYQQ6u03kq1rwGv96WIAAAAASUVORK5CYII=');
+}
+#container .orderedlist{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJDSURBVHic7dq9TxRBGMfx7x2KQfSQzhCICRgSk9OKBgobwY6KhARLC/4CaioKqAQLGwtfao0k0BITNbGSoFEIEBrsjAQTCETepJi7gMfOvrl7Oye/TzLNZGb3mefYJfPsgIiIiIiIiIiIiMh5lws57gJQBLaAtZBzmoHbQH2MuLLyE/gG7Me9QBFYBf6U2nvgus/4HPAYODo1p5baD6A3Rp7IAV89LvjaZ84DBxacRMKuRE3WTcvFdjGPppfnDiw2iXa3cmH5gGTtlCZWOsA8ZrY5/4NY65jmbNYf+YzvpnbfV+X2GaiLniooAE+BX5hneRz7I1g2ACwDhw4sPErbBWaAtqhJEhERERGpirD1rKiuAQ+BdmAeeInZT/q5B9wvzc3KNvABeFOtGzYDK/y9jZjDf681QjbbG1ub/McchDZqCWDQMr6Bk+qGK+0QuFEZaFCJJo6ipf+Opb8NkzCX5IFOr86kLVr6lyz93zG7fZccYaomqWvCJOb0n/U7/D9c1MQ7K63/hgVgGFOW/gS8APYC5vQB/cCllGIK4wB4C7zKMAYREREREfcVgGfAJrAOjBF8rmsAWMDsDJLa5mxijis4/UV6hrOBT/iM7yHd8xRfCD6ikIkWvAPewL53fWKZk2TrqrxpGiWaqBot/Vex/7qXU4ql2veIzHa6cNZnzpDH+CRbrJN/1XILU2wrB/uR4HOrU6Tz3rKeKU2rnhVHHlOS/s3JB48grUAHcDGhGLYxB9lcq9yKiIiIiIiIiIiIOOIYaxc11Cpvh4UAAAAASUVORK5CYII=');
+}
+#container .strikethrough{
+    background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12.73%2014l.28.14c.26.15.45.3.57.44.12.14.18.3.18.5%200%20.3-.15.56-.44.75-.3.2-.76.3-1.39.3A13.52%2013.52%200%200%201%207%2014.95v3.37a10.64%2010.64%200%200%200%204.84.88c1.26%200%202.35-.19%203.28-.56.93-.37%201.64-.9%202.14-1.57s.74-1.45.74-2.32c0-.26-.02-.51-.06-.75h-5.21zm-5.5-4c-.08-.34-.12-.7-.12-1.1%200-1.29.52-2.3%201.58-3.02%201.05-.72%202.5-1.08%204.34-1.08%201.62%200%203.28.34%204.97%201l-1.3%202.93c-1.47-.6-2.73-.9-3.8-.9-.55%200-.96.08-1.2.26-.26.17-.38.38-.38.64%200%20.27.16.52.48.74.17.12.53.3%201.05.53H7.23zM3%2013h18v-2H3v2z%22%2F%3E%3C%2Fsvg%3E');
+}
+#container .color-apply{
+    background-image: url('data:image/svg+xml,%3Csvg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns%23" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns%23" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="540" height="540" id="svg2"%3E%3Cdefs id="defs4"/%3E%3Cmetadata id="metadata6"%3E%3Crdf:RDF%3E%3Ccc:Work%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/%3E%3Cdc:creator%3E%3Ccc:Agent%3E%3Cdc:title%3EMarianSigler, mariansigler@gmail.com%3C/dc:title%3E%3C/cc:Agent%3E%3C/dc:creator%3E%3Ccc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/%3E%3Cdc:title/%3E%3C/cc:Work%3E%3Ccc:License rdf:about="http://web.resource.org/cc/PublicDomain"%3E%3Ccc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/%3E%3Ccc:permits rdf:resource="http://web.resource.org/cc/Distribution"/%3E%3Ccc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/%3E%3Ccc:requires rdf:resource="http://web.resource.org/cc/ShareAlike"/%3E%3C/cc:License%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cpath d="m 511.48146,205.29524 c 11.90567,44.43259 11.90567,84.97693 0,129.40952 L 487.31476,349.3424 270,270 490.20449,192.09986 z" id="path16" style="fill:%23fefe33"/%3E%3Cpath d="m 334.70476,28.518543 c 44.43259,11.905676 79.54502,32.17785 112.07193,64.704761 L 447.40047,118.09589 270,270 313.06484,40.508134 z" id="path20" style="fill:%23fb9902"/%3E%3Cpath d="m 446.77669,93.223304 c 32.52692,32.526916 52.79909,67.639346 64.70477,112.071936 L 270,270 z" id="path18" style="fill:%23fabc02"/%3E%3Cpath d="M 93.223305,93.223305 C 125.75022,60.696393 160.86265,40.42422 205.29524,28.518543 L 231.20546,44.501656 270,270 92.739568,120.0571 z" id="path28" style="fill:%23fe2712"/%3E%3Cpath d="m 205.29524,28.518543 c 44.43259,-11.905676 84.97693,-11.905676 129.40952,0 L 270,270 z" id="path22" style="fill:%23fd5308"/%3E%3Cpath d="m 28.518543,334.70476 c -11.905676,-44.43259 -11.905676,-84.97693 0,-129.40952 L 56.311276,186.62718 270,270 55.854788,349.40527 z" id="path26" style="fill:%238601af"/%3E%3Cpath d="M 28.518543,205.29524 C 40.424219,160.86265 60.696393,125.75022 93.223305,93.223305 L 270,270 z" id="path30" style="fill:%23a7194b"/%3E%3Cpath d="M 205.29524,511.48146 C 160.86265,499.57578 125.75022,479.30361 93.223305,446.7767 L 95.307837,418.58874 270,270 231.0453,499.70648 z" id="path8" style="fill:%230247fe"/%3E%3Cpath d="M 93.223305,446.7767 C 60.696393,414.24978 40.42422,379.13735 28.518543,334.70476 L 270,270 z" id="path24" style="fill:%233d01a4"/%3E%3Cpath d="m 446.7767,446.7767 c -32.52692,32.52691 -67.63935,52.79908 -112.07194,64.70476 L 310.45335,496.38826 270,270 446.04632,421.15701 z" id="path12" style="fill:%2366b032"/%3E%3Cpath d="m 334.70476,511.48146 c -44.43259,11.90567 -84.97693,11.90567 -129.40952,0 L 270,270 z" id="path10" style="fill:%230391ce"/%3E%3Cpath d="M 511.48146,334.70476 C 499.57578,379.13735 479.30361,414.24978 446.7767,446.7767 L 270,270 511.48146,334.70476 z" id="path14" style="fill:%23d0ea2b"/%3E%3Ccircle cx="270" cy="270" r="153.79581" id="circle32" style="fill:%23ffffff"/%3E%3C/svg%3E');    width: 20px;
+    width: 40px;
+}
+#container #input-font{
+    width: 100px;
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text);
+    color:#888;
+}
+#container .loader {
+    border: 6px solid #f3f3f3; 
+    border-top: 6px solid #3498db; 
+    border-radius: 50%;
+    width: 20px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+    line-height: 20px;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+
+ /* Customize the label (the container) */
+ .checkbox-container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .checkbox-text {
+    padding-left: 35px;
+  }
+
+  /* Hide the browser's default checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }

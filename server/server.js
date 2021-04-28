@@ -12,8 +12,12 @@ const uuid = require('uuid');
 
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('./database.json');
+const account_db = new JSONdb('./account_database.json');
 var session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+
+const todo = require('./src/todo');
+const todos = require('./src/todos');
 
 dotenv.config({ path: './config.env' });
 
@@ -25,7 +29,7 @@ app.use(json());
 
 
 app.set('trust proxy', 1)
-app.use(session({secret: '.', resave: false, saveUninitialized: true}));
+app.use(session({secret: '.', resave: false, saveUninitialized: true, cookie  : { maxAge  : new Date(Date.now() + (60 * 1000 * 30)) } }));
 
 
 app.use((req, res, next) => {
@@ -33,69 +37,29 @@ app.use((req, res, next) => {
 	
 	if(!req.session.uuid){
 		req.session.uuid = uuid.v4();
-		db.set(req.session.uuid, [
-			{
-				id: nanoid(),
-				title: 'todo 1',
-				completed: true,
-			},
-			{
-				id: nanoid(),
-				title: 'todo 2',
-				completed: false,
-			},
-			{
-				id: nanoid(),
-				title: 'todo 3',
-				completed: false,
-			},
-			{
-				id: nanoid(),
-				title: 'todo 4',
-				completed: false,
-			},
-			{
-				id: nanoid(),
-				title: 'todo 5',
-				completed: false,
-			},
-		]
-	 ) // default todo data
+		let todo = {
+			id: nanoid(),
+			title: 'todo item 1',
+			completed: true,
+		};
+		let todoList = {
+			title: 'todo list 1',
+			sharedWith: [],
+			todos: [todo],
+		}
+		let user = {
+			username: '',
+			password: '',
+			uuid: req.session.uuid
+		};
+		db.set(req.session.uuid, {todoLists: [todoList]}) // default todo data
+		account_db.set(user.uuid, user)
 	}
 	next();
 });
 
-app.get('/todos', (req, res) => {
-
-	return res.send(db.get(req.session.uuid))
-});
-
-app.post('/todos', (req, res) => {
-	const todo = [{ title: req.body.title, id: nanoid(), completed: false }];
-	return res.send(db.get(req.session.uuid));
-});
-
-app.patch('/todos/:id', (req, res) => {
-	const id = req.params.id;
-	const index = db.get(req.session.uuid).findIndex((todo) => todo.id == id);
-	const completed = Boolean(req.body.completed);
-	if (index > -1) {
-		todos[index].completed = completed;
-	}
-	return res.send(todos[index]);
-});
-
-app.delete('/todos/:id', (req, res) => {
-	const id = req.params.id;
-	const todos = db.get('todos');
-	const index = todos.findIndex((todo) => todo.id == id);
-
-	if (index > -1) {
-		todos.splice(index, 1);
-	}
-	db.set('todos', todos);
-	res.send(todos);
-});
+todo(app, db);
+todos(app, db);
 
 const PORT = 3001;
 

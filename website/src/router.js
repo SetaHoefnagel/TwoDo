@@ -18,13 +18,9 @@ import {
         </Route>
 
 
-        <Route exact path="/">
+        <Route path="/">
             {/* TODO: check if user is logged in, true > goto list of todo lists, false > show general home screen */}
             <Home />
         </Route>
-        <Route>
-            404
-        </Route>
-
     </Switch>
   )
