@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { AlbumCard } from './components/AlbumCard';
 import { useEffect } from 'react';
 import { Homepage } from './components/Homepage';
+import { Login } from './components/Login';
 
 const theme = createTheme({
     palette: {
@@ -108,6 +109,10 @@ function App() {
                                     <Homepage />
                                 </Route>
                                 <AuthenticatedRoute authed={true} path={"/logout/"} component={AlbumCard} />
+                                <Route path={"/login/"}>
+                                    <Login />
+                                </Route>
+                                
                                 <Route path={"*"}>
                                     <Redirect to={"/"}/>
                                 </Route>
