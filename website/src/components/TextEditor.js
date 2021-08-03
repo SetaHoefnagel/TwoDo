@@ -1,13 +1,23 @@
 import React, { useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import CheckboxElement from './CheckboxElement';
-import ReactDOMServer from 'react-dom/server';
+
+import { CKEditor, CKEditorContext } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
+import Context from '@ckeditor/ckeditor5-core/src/context';
+import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 
 export default () => {
   const ref = React.createRef();
   let ces = [];
   let refs = {};
   const [ref2, setRef2] = useHookWithRefCallback();
+  const [html, setHTML] = "<b>Hello <i>World</i></b>";
+  const contentEditable = React.createRef();
 
     function chooseColor(){
         var mycolor = document.getElementById("myColor").value;
@@ -78,53 +88,37 @@ export default () => {
             }
         }
     }
-     
 
     return (
         <div id="container" >
-            <fieldset>
-                <button class="fontStyle italic" onClick={() => document.execCommand('italic',false,null)} title="Italicize Highlighted Text"></button>
-                <button class="fontStyle bold" onClick={() => document.execCommand( 'bold',false,null)} title="Bold Highlighted Text"></button>
-                <button class="fontStyle underline" onClick={() => document.execCommand( 'underline',false,null)}></button>
-                <button class="fontStyle strikethrough" onClick={() => document.execCommand( 'strikethrough',false,null)}><strikethrough></strikethrough></button>
-                <select id="input-font" class="input"  onChange={changeFont}>
-                    <option value="Arial">Arial</option>
-                    <option value="Helvetica">Helvetica</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Sans serif">Sans serif</option>
-                    <option value="Courier New">Courier New</option>
-                    <option value="Verdana">Verdana</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Palatino">Palatino</option>
-                    <option value="Garamond">Garamond</option>
-                    <option value="Comic Sans MS">Comic Sans MS</option>
-                    <option value="Arial Black">Arial Black</option>
-                    <option value="Tahoma">Tahoma</option>
-                    <option value="Comic Sans MS">Comic Sans MS</option>
-                </select>
-                <button class="fontStyle align-left" onClick={() => document.execCommand( 'justifyLeft',false,null)}><justifyLeft></justifyLeft></button>
-                <button class="fontStyle align-center" onClick={() => document.execCommand( 'justifyCenter',false,null)}><justifyCenter></justifyCenter></button>
-                <button class="fontStyle align-right" onClick={() => document.execCommand( 'justifyRight',false,null)}><justifyRight></justifyRight></button>
-                <button class="fontStyle undo-apply" onClick={() => document.execCommand( 'undo',false,null)}><undo></undo></button>
-                <button class="fontStyle redo-apply" onClick={() => document.execCommand( 'redo',false,null)}><redo></redo></button>
-                <button class="fontStyle orderedlist" onClick={() => document.execCommand('insertOrderedList', false, null)}><insertOrderedList></insertOrderedList></button>
-                <button class="fontStyle unorderedlist" onClick={insertCheckList}><insertUnorderedList></insertUnorderedList></button>    
-                <input class="color-apply" type="color" onChange={chooseColor} id="myColor" /> 
-            
-                <select id="fontSize" onClick={changeSize}>
-                    <option value="6">H1</option>      
-                    <option value="5">H2</option>
-                    <option value="4">H3</option>
-                    <option value="3">H4</option>
-                    <option value="2">H5</option>
-                    <option value="1">H6</option>
-                </select>
-                
-            </fieldset>
-    
-            <div id='editor1' className='Editor' ref={ref} contentEditable={true} suppressContentEditableWarning={true} data-text="Todo....">
-              <div></div>
-            </div>
+                  <CKEditorContext context={ Context }>
+                      <CKEditor
+                        editor={ ClassicEditor }
+                        config={ {
+                          plugins: [ Paragraph, Bold, Italic, Essentials, TodoList ],
+                          toolbar: [ 'heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', 'todoList', 'blockQuote' ],
+                        } }
+                        data="<p>Hello from the first editor working with the context!</p>"
+                        onReady={ editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log( 'Editor1 is ready to use!', editor );
+                        } }
+                    />
+
+                  <h2>Using the CKeditor 5 context feature in React</h2>
+                    <CKEditor
+                        editor={ ClassicEditor }
+                        config={ {
+                            plugins: [ Paragraph, Bold, Italic, Essentials ],
+                            toolbar: [ 'bold', 'italic' ]
+                        } }
+                        data="<p>Hello from the first editor working with the context!</p>"
+                        onReady={ editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log( 'Editor1 is ready to use!', editor );
+                        } }
+                    />
+                  </CKEditorContext>
         </div>
     )
 }

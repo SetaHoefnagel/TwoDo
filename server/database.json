@@ -13,5 +13,20 @@
                 ]
             }
         ]
+    },
+    "baf6bc49-83d6-41a4-9b43-7168d68abf1c": {
+        "todoLists": [
+            {
+                "title": "todo list 1",
+                "sharedWith": [],
+                "todos": [
+                    {
+                        "id": "-Xa8LrbnOaXnvwhcyrfyy",
+                        "title": "todo item 1",
+                        "completed": true
+                    }
+                ]
+            }
+        ]
     }
 }
